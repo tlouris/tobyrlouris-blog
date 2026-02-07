@@ -43,7 +43,7 @@ Modular FastAPI application (Python 3.11, SQLAlchemy 2.0 ORM, PyMySQL driver):
 - `routers/public.py` — All public API endpoints (`/api/posts`, `/api/comments`, `/api/contact`, `/api/newsletter`, `/api/visitor-log`, `/api/health`).
 - `routers/admin_*.py` — Admin CRUD endpoints under `/api/admin/` prefix. Each router handles one domain (posts, comments, contacts, newsletter, visitors, dashboard, auth).
 - `auth/` — Session-based admin auth:
-  - `password.py` — bcrypt verification via passlib.
+  - `password.py` — PBKDF2-HMAC-SHA256 hashing/verification (stdlib `hashlib`, no external deps).
   - `session.py` — Server-side sessions stored in DB with sliding-window expiry.
   - `dependencies.py` — `get_current_admin` FastAPI dependency validates `admin_session` httponly cookie.
   - `rate_limit.py` — In-memory IP-based rate limiter (sliding window) for public endpoints.
@@ -58,7 +58,7 @@ Vanilla HTML/CSS/JS, no build step. Served directly by nginx from `/usr/share/ng
 ### Key conventions
 
 - Blog posts use a `status` column (`published`/`draft`/`archived`), not a boolean.
-- Admin auth is single-user: credentials come from env vars `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH` (bcrypt).
+- Admin auth is single-user: credentials come from env vars `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH` (PBKDF2-HMAC-SHA256, hex-encoded `salt:hash`).
 - Nginx config at `docker/nginx/conf.d/default.conf` — admin static files have cache disabled; regex location ordering matters (admin no-cache must come before general static caching rules).
 - Database is seeded by `docker/mysql/init.sql` on first run.
 
@@ -66,4 +66,4 @@ Vanilla HTML/CSS/JS, no build step. Served directly by nginx from `/usr/share/ng
 
 Copy `backend/.env.example` to `.env` at project root. The `docker-compose.yml` uses `env_file: .env`.
 
-**Gotcha**: `$` characters in bcrypt hashes get interpolated by docker-compose when set via `environment:` in the YAML. The project uses `env_file:` directive to avoid this.
+Password hashes use PBKDF2-HMAC-SHA256 with hex-encoded output (`salt:hash`), so there are no special characters that could be interpolated by docker-compose or python-dotenv.
