@@ -44,7 +44,7 @@ def admin_login(
     user_agent = request.headers.get("User-Agent", "")
     admin_session = create_session(db, ip_address, user_agent)
 
-    is_secure = APP_ENV == "production"
+    is_secure = request.headers.get("X-Forwarded-Proto", request.url.scheme) == "https"
     response.set_cookie(
         key="admin_session",
         value=admin_session.id,
