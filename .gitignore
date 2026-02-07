@@ -30,6 +30,7 @@ logs/
 
 # Database
 *.sql
+!docker/mysql/init.sql
 *.db
 *.sqlite
 
