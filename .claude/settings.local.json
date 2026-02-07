@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"from passlib.hash import bcrypt; print\\(bcrypt.hash\\(''admin123''\\)\\)\")",
+      "Bash(pip3 install:*)",
+      "Bash(python3:*)",
+      "Bash(pip install:*)",
+      "Bash(find:*)",
+      "Bash(docker compose down:*)",
+      "Bash(systemctl status:*)",
+      "Bash(flatpak list:*)",
+      "Bash(podman:*)",
+      "Bash(echo:*)",
+      "Bash(docker:*)",
+      "Bash(docker compose:*)",
+      "Bash(hash -r)",
+      "Bash(export PATH:*)",
+      "Bash(ls:*)",
+      "Bash(dpkg:*)",
+      "Bash(snap list:*)",
+      "Bash(/usr/bin/docker:*)",
+      "Bash(curl:*)"
+    ]
+  }
+}

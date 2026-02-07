@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitors — Admin Panel</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h2>Admin Panel</h2><small>Technology Innovations</small></div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><span class="nav-icon">&#9632;</span> Dashboard</a>
+                <a href="posts.html"><span class="nav-icon">&#9998;</span> Posts</a>
+                <a href="comments.html"><span class="nav-icon">&#9993;</span> Comments</a>
+                <a href="contacts.html"><span class="nav-icon">&#9742;</span> Contacts</a>
+                <a href="newsletter.html"><span class="nav-icon">&#9993;</span> Newsletter</a>
+                <a href="visitors.html"><span class="nav-icon">&#9788;</span> Visitors</a>
+            </nav>
+            <div class="sidebar-footer"><a href="#" onclick="logout(); return false;">Sign Out</a></div>
+        </aside>
+
+        <main class="main-content">
+            <div class="topbar">
+                <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
+                <h1>Visitor Logs</h1>
+                <div class="topbar-actions"></div>
+            </div>
+
+            <div class="page-content">
+                <div class="filter-bar">
+                    <div class="form-group" style="margin-bottom:0">
+                        <label for="startDate" style="font-size:0.75rem">Start Date</label>
+                        <input type="date" id="startDate" class="form-control">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0">
+                        <label for="endDate" style="font-size:0.75rem">End Date</label>
+                        <input type="date" id="endDate" class="form-control">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0; flex:1; min-width:150px;">
+                        <label for="pageFilter" style="font-size:0.75rem">Page</label>
+                        <input type="text" id="pageFilter" class="form-control" placeholder="Filter by page path...">
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="loadVisitors(1)" style="align-self:flex-end">Filter</button>
+                </div>
+
+                <div class="card">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Page</th>
+                                    <th>Referrer</th>
+                                    <th>User Agent</th>
+                                    <th>IP</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="visitorsTableBody">
+                                <tr><td colspan="5"><div class="loading"><div class="spinner"></div></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="pagination" id="pagination"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin-common.js"></script>
+    <script src="js/admin-visitors.js"></script>
+</body>
+</html>

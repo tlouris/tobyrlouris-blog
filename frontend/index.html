@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional insights on digital strategy, cybersecurity, projects, and regulation in wastewater technology.">
+  <meta name="keywords" content="wastewater technology, digital transformation, cybersecurity, water industry, SCADA">
+  <title>Technology Innovations for the Water Industry | Professional Blog</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+</head>
+<body data-page="home">
+  <!-- Skip to content for accessibility -->
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+  <!-- ============================================
+       HEADER & NAVIGATION
+       ============================================ -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="site-logo">
+        <a href="/">Technology Innovations for Water</a>
+      </div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/blogs.html">Blogs</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================
+       MAIN CONTENT
+       ============================================ -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Technology Innovations for the Water Industry</h1>
+          <p class="hero-tagline">
+            Practical insights on digital strategy, cybersecurity, projects, and regulation in wastewater technology.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topic Cards Section -->
+    <section class="topics-section">
+      <div class="container">
+        <h2 class="section-title">Explore by Topic</h2>
+        <div class="topics-grid">
+          <!-- Digital Strategy -->
+          <div class="topic-card" onclick="location.href='/category.html?category=digital-strategy'">
+            <h3>Digital Strategy</h3>
+            <p>
+              Explore digital transformation roadmaps, technology adoption strategies, and innovation frameworks for modern wastewater operations.
+            </p>
+            <span class="topic-card-link">Explore Articles →</span>
+          </div>
+
+          <!-- Cybersecurity & Resilience -->
+          <div class="topic-card" onclick="location.href='/category.html?category=cybersecurity'">
+            <h3>Cybersecurity & Resilience</h3>
+            <p>
+              Best practices for protecting critical infrastructure, securing SCADA systems, and building operational resilience against cyber threats.
+            </p>
+            <span class="topic-card-link">Explore Articles →</span>
+          </div>
+
+          <!-- Project Lessons -->
+          <div class="topic-card" onclick="location.href='/category.html?category=project-lessons'">
+            <h3>Project Lessons</h3>
+            <p>
+              Real-world insights from technology implementations, lessons learned, and practical guidance for successful project delivery.
+            </p>
+            <span class="topic-card-link">Explore Articles →</span>
+          </div>
+
+          <!-- Industry Trends & Regulation -->
+          <div class="topic-card" onclick="location.href='/category.html?category=industry-trends'">
+            <h3>Industry Trends & Regulation</h3>
+            <p>
+              Stay informed about emerging technologies, regulatory changes, compliance requirements, and industry developments.
+            </p>
+            <span class="topic-card-link">Explore Articles →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="posts-section">
+      <div class="container">
+        <h2 class="section-title">Featured Article</h2>
+        <div class="featured-post">
+          <!-- Dynamically loaded by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Posts -->
+    <section class="posts-section" style="padding-top: 0;">
+      <div class="container">
+        <h2 class="section-title">Latest Articles</h2>
+        <div class="posts-grid">
+          <!-- Dynamically loaded by JavaScript -->
+        </div>
+        <div class="text-center mt-lg">
+          <a href="/blogs.html" class="btn btn-primary">View All Articles</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Preview -->
+    <section class="posts-section" style="background-color: var(--color-gray-50);">
+      <div class="container-narrow">
+        <div class="text-center">
+          <h2 class="section-title">About This Blog</h2>
+          <p style="font-size: 1.1rem; color: var(--color-gray-600); margin-bottom: var(--space-lg);">
+            This blog shares practical insights and lessons learned from technology leadership in the wastewater industry.
+            Topics focus on digital transformation, operational technology security, project management, and navigating
+            the evolving regulatory landscape.
+          </p>
+          <p style="font-size: 1.1rem; color: var(--color-gray-600); margin-bottom: var(--space-xl);">
+            Whether you're a plant manager, technology director, consultant, or industry professional,
+            you'll find actionable insights to help modernize operations and strengthen your facility's technology foundation.
+          </p>
+          <a href="/about.html" class="btn btn-secondary">Learn More About the Author</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-section">
+      <div class="container">
+        <h2>Subscribe to Updates</h2>
+        <p style="margin-bottom: var(--space-lg); color: rgba(255,255,255,0.9);">
+          Get notified when new articles are published. No spam, unsubscribe anytime.
+        </p>
+        <form id="newsletter-form" class="newsletter-form">
+          <input
+            type="email"
+            placeholder="Enter your email address"
+            required
+            aria-label="Email address"
+          >
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>About</h4>
+          <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+            Professional insights on technology innovation in the wastewater industry.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Navigate</h4>
+          <ul class="footer-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/blogs.html">All Articles</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Topics</h4>
+          <ul class="footer-nav">
+            <li><a href="/category.html?category=digital-strategy">Digital Strategy</a></li>
+            <li><a href="/category.html?category=cybersecurity">Cybersecurity & Resilience</a></li>
+            <li><a href="/category.html?category=project-lessons">Project Lessons</a></li>
+            <li><a href="/category.html?category=industry-trends">Industry Trends</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul class="footer-nav">
+            <li><a href="/contact.html">Get in Touch</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Technology Innovations for the Water Industry. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/js/main.js"></script>
+</body>
+</html>

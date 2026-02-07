@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts — Admin Panel</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h2>Admin Panel</h2><small>Technology Innovations</small></div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><span class="nav-icon">&#9632;</span> Dashboard</a>
+                <a href="posts.html"><span class="nav-icon">&#9998;</span> Posts</a>
+                <a href="comments.html"><span class="nav-icon">&#9993;</span> Comments</a>
+                <a href="contacts.html"><span class="nav-icon">&#9742;</span> Contacts</a>
+                <a href="newsletter.html"><span class="nav-icon">&#9993;</span> Newsletter</a>
+                <a href="visitors.html"><span class="nav-icon">&#9788;</span> Visitors</a>
+            </nav>
+            <div class="sidebar-footer"><a href="#" onclick="logout(); return false;">Sign Out</a></div>
+        </aside>
+
+        <main class="main-content">
+            <div class="topbar">
+                <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
+                <h1>Contact Submissions</h1>
+                <div class="topbar-actions"></div>
+            </div>
+
+            <div class="page-content">
+                <div class="tab-filters" id="statusTabs">
+                    <button class="active" data-status="">All</button>
+                    <button data-status="unread">Unread</button>
+                    <button data-status="read">Read</button>
+                </div>
+
+                <div class="card">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Organization</th>
+                                    <th>Topic</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contactsTableBody">
+                                <tr><td colspan="7"><div class="loading"><div class="spinner"></div></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="pagination" id="pagination"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- View contact modal -->
+    <div class="modal-overlay" id="viewModal">
+        <div class="modal">
+            <div class="modal-header"><h3 id="modalContactName">Contact Details</h3><button class="modal-close" onclick="closeViewModal()">&times;</button></div>
+            <div class="modal-body" id="modalContactBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeViewModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-common.js"></script>
+    <script src="js/admin-contacts.js"></script>
+</body>
+</html>

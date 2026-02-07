@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Admin Panel</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <small>Technology Innovations</small>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><span class="nav-icon">&#9632;</span> Dashboard</a>
+                <a href="posts.html"><span class="nav-icon">&#9998;</span> Posts</a>
+                <a href="comments.html"><span class="nav-icon">&#9993;</span> Comments</a>
+                <a href="contacts.html"><span class="nav-icon">&#9742;</span> Contacts</a>
+                <a href="newsletter.html"><span class="nav-icon">&#9993;</span> Newsletter</a>
+                <a href="visitors.html"><span class="nav-icon">&#9788;</span> Visitors</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" onclick="logout(); return false;">Sign Out</a>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content">
+            <div class="topbar">
+                <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
+                <h1>Dashboard</h1>
+                <div class="topbar-actions">
+                    <a href="post-editor.html" class="btn btn-primary btn-sm">New Post</a>
+                </div>
+            </div>
+
+            <div class="page-content">
+                <!-- Stats -->
+                <div class="stats-grid" id="statsGrid">
+                    <div class="stat-card"><div class="stat-label">Total Posts</div><div class="stat-value" id="statPosts">—</div><div class="stat-detail" id="statPostsDetail"></div></div>
+                    <div class="stat-card"><div class="stat-label">Visitors (7d)</div><div class="stat-value" id="statVisitors7d">—</div><div class="stat-detail" id="statVisitors30d"></div></div>
+                    <div class="stat-card"><div class="stat-label">Pending Comments</div><div class="stat-value" id="statComments">—</div><div class="stat-detail" id="statCommentsDetail"></div></div>
+                    <div class="stat-card"><div class="stat-label">Subscribers</div><div class="stat-value" id="statSubscribers">—</div><div class="stat-detail" id="statSubscribersDetail"></div></div>
+                </div>
+
+                <!-- Visitor Chart -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Visitor Traffic</h2>
+                        <div class="chart-toggle">
+                            <button class="active" data-period="7d">7 Days</button>
+                            <button data-period="30d">30 Days</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="visitorChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="stats-grid">
+                    <div class="card">
+                        <div class="card-header"><h2>Quick Actions</h2></div>
+                        <div class="card-body">
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <a href="post-editor.html" class="btn btn-primary btn-sm">Create New Post</a>
+                                <a href="comments.html" class="btn btn-outline btn-sm">Moderate Comments</a>
+                                <a href="contacts.html" class="btn btn-outline btn-sm">View Contact Submissions</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="unreadContactsCard" style="display:none">
+                        <div class="card-header"><h2>Unread Contacts</h2></div>
+                        <div class="card-body">
+                            <p id="unreadContactsMsg"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin-common.js"></script>
+    <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

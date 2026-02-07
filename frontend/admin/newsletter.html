@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter — Admin Panel</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h2>Admin Panel</h2><small>Technology Innovations</small></div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><span class="nav-icon">&#9632;</span> Dashboard</a>
+                <a href="posts.html"><span class="nav-icon">&#9998;</span> Posts</a>
+                <a href="comments.html"><span class="nav-icon">&#9993;</span> Comments</a>
+                <a href="contacts.html"><span class="nav-icon">&#9742;</span> Contacts</a>
+                <a href="newsletter.html"><span class="nav-icon">&#9993;</span> Newsletter</a>
+                <a href="visitors.html"><span class="nav-icon">&#9788;</span> Visitors</a>
+            </nav>
+            <div class="sidebar-footer"><a href="#" onclick="logout(); return false;">Sign Out</a></div>
+        </aside>
+
+        <main class="main-content">
+            <div class="topbar">
+                <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
+                <h1>Newsletter Subscribers</h1>
+                <div class="topbar-actions">
+                    <span id="subscriberSummary" style="font-size:0.85rem; color:var(--text-light);"></span>
+                </div>
+            </div>
+
+            <div class="page-content">
+                <div class="tab-filters" id="statusTabs">
+                    <button class="active" data-status="">All</button>
+                    <button data-status="active">Active</button>
+                    <button data-status="inactive">Inactive</button>
+                </div>
+
+                <div class="card">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Subscribed</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subscribersTableBody">
+                                <tr><td colspan="4"><div class="loading"><div class="spinner"></div></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="pagination" id="pagination"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin-common.js"></script>
+    <script src="js/admin-newsletter.js"></script>
+</body>
+</html>
