@@ -5,7 +5,7 @@ Or run inside Docker: docker compose exec backend python generate_hash.py YOUR_P
 """
 
 import sys
-from passlib.hash import bcrypt
+import bcrypt
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -13,7 +13,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     password = sys.argv[1]
-    hashed = bcrypt.hash(password)
+    hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
     print(f"\nGenerated bcrypt hash:\n{hashed}")
     print(f"\nAdd this to your .env file:")
     print(f"ADMIN_PASSWORD_HASH={hashed}")

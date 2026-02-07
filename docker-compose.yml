@@ -29,6 +29,7 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+      - .env.admin
     environment:
       DATABASE_URL: mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}
     depends_on:
