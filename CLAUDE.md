@@ -54,11 +54,12 @@ Vanilla HTML/CSS/JS, no build step. Served directly by nginx from `/usr/share/ng
 
 - Public pages: `index.html`, `blogs.html`, `about.html`, `contact.html`, `category.html`, `post.html`
 - Admin panel: `frontend/admin/` — separate HTML pages (login, dashboard, post editor, comments, contacts, newsletter, visitors) with their own CSS/JS.
+- TinyMCE 6.8.5 is self-hosted at `frontend/admin/lib/tinymce/` (no CDN API key needed).
 
 ### Key conventions
 
 - Blog posts use a `status` column (`published`/`draft`/`archived`), not a boolean.
-- Admin auth is single-user: credentials come from env vars `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH` (PBKDF2-HMAC-SHA256, hex-encoded `salt:hash`).
+- Admin auth is single-user: credentials come from env vars `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH` (PBKDF2-HMAC-SHA256, hex-encoded `salt:hash`). Cookie `Secure` flag is set based on `X-Forwarded-Proto` header, so it works correctly over both HTTP and HTTPS.
 - Nginx config at `docker/nginx/conf.d/default.conf` — admin static files have cache disabled; regex location ordering matters (admin no-cache must come before general static caching rules).
 - Database is seeded by `docker/mysql/init.sql` on first run.
 

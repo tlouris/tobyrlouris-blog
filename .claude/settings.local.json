@@ -19,7 +19,10 @@
       "Bash(dpkg:*)",
       "Bash(snap list:*)",
       "Bash(/usr/bin/docker:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.docker.com)",
+      "Bash(ssh:*)"
     ]
   }
 }

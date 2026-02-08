@@ -21,6 +21,7 @@ from routers.admin_comments import router as admin_comments_router
 from routers.admin_contacts import router as admin_contacts_router
 from routers.admin_newsletter import router as admin_newsletter_router
 from routers.admin_visitors import router as admin_visitors_router
+from routers.admin_uploads import router as admin_uploads_router
 
 
 @asynccontextmanager
@@ -62,6 +63,7 @@ app.include_router(admin_comments_router)
 app.include_router(admin_contacts_router)
 app.include_router(admin_newsletter_router)
 app.include_router(admin_visitors_router)
+app.include_router(admin_uploads_router)
 
 
 if __name__ == "__main__":

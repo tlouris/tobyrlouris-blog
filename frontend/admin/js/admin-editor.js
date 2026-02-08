@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         loadPost(editId);
     }
 
+    // Show image preview if URL is already populated (editing existing post)
+    document.getElementById('image_url').addEventListener('input', updateImagePreview);
+
     // Form submission
     document.getElementById('postForm').addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -60,6 +63,7 @@ async function loadPost(id) {
         document.getElementById('reading_time').value = post.reading_time || '';
         document.getElementById('author').value = post.author;
         document.getElementById('image_url').value = post.image_url || '';
+        updateImagePreview();
         document.getElementById('featured').checked = post.featured;
         document.getElementById('excerpt').value = post.excerpt;
 
@@ -113,4 +117,49 @@ async function savePost() {
         btn.disabled = false;
         btn.textContent = 'Save Post';
     }
+}
+
+function updateImagePreview() {
+    const url = document.getElementById('image_url').value;
+    const preview = document.getElementById('imagePreview');
+    const img = document.getElementById('imagePreviewImg');
+    if (url) {
+        img.src = url;
+        preview.style.display = 'block';
+    } else {
+        preview.style.display = 'none';
+    }
+}
+
+async function uploadImage(input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    showToast('Uploading image...');
+
+    try {
+        const res = await fetch(`${ADMIN_API}/uploads/image`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData,
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.detail || 'Upload failed');
+        }
+
+        const data = await res.json();
+        document.getElementById('image_url').value = data.url;
+        updateImagePreview();
+        showToast('Image uploaded successfully');
+    } catch (err) {
+        showToast('Upload failed: ' + err.message, 'error');
+    }
+
+    // Reset file input so the same file can be re-selected
+    input.value = '';
 }
