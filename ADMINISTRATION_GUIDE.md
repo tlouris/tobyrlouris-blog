@@ -31,6 +31,7 @@ The blog runs as a containerized application with three main components:
 - **Nginx Container** (`tobyrlouris-nginx`) - Web server and reverse proxy
 - **FastAPI Container** (`tobyrlouris-backend`) - Python backend API
 - **MariaDB Container** (`tobyrlouris-mysql`) - Database server (MariaDB 10.11)
+- **Uploads Volume** (`uploads_data`) - Persistent storage for uploaded images (shared between backend and nginx)
 
 ### Database: MariaDB vs MySQL
 
@@ -65,6 +66,7 @@ sudo docker exec tobyrlouris-mysql mysql --version
 - **Backups:** `/var/backups/tobyrlouris-blog/`
 - **Logs:** `/var/log/tobyrlouris-blog/`
 - **Git Repository:** `/opt/tobyrlouris-blog/.git`
+- **Uploaded Images:** Stored in `uploads_data` Docker volume (backend writes, nginx serves read-only)
 
 ### Important Credentials
 ```bash
@@ -832,7 +834,18 @@ sudo docker compose up -d --force-recreate mysql
 
 ### Application Updates
 
-**Update backend code:**
+**Update via Git (recommended):**
+```bash
+# From your local machine (uses SSH agent forwarding for GitHub auth)
+ssh -A devserver "cd /opt/tobyrlouris-blog && git pull"
+
+# Then rebuild if backend/docker changes were made
+ssh devserver "cd /opt/tobyrlouris-blog && docker compose up -d --build"
+
+# Frontend-only changes don't need a rebuild - nginx serves static files directly
+```
+
+**Update backend code (manual):**
 ```bash
 # 1. Update code files
 nano /opt/tobyrlouris-blog/backend/main.py
@@ -886,6 +899,52 @@ sudo systemctl status unattended-upgrades
 
 # View update logs
 sudo tail -f /var/log/unattended-upgrades/unattended-upgrades.log
+```
+
+---
+
+## Image Upload Management
+
+### How Image Uploads Work
+- Admin uploads images through the post editor (max **10 MB**)
+- Backend saves files to `/app/uploads/images/` inside the backend container
+- The `uploads_data` Docker volume is shared between backend (read-write) and nginx (read-only)
+- Nginx serves uploaded images at `/uploads/images/` with 30-day cache headers
+- The nginx location uses `^~` modifier to prevent regex static caching rules from overriding it
+
+### Accepted File Types
+- JPEG (.jpg)
+- PNG (.png)
+- GIF (.gif)
+- WebP (.webp)
+
+### Troubleshooting Uploads
+
+**Uploaded images returning 404:**
+```bash
+# Check if file exists in backend container
+sudo docker compose exec backend ls -la /app/uploads/images/
+
+# Check if nginx can see the volume
+sudo docker compose exec nginx ls -la /uploads/images/
+
+# Verify nginx config has ^~ on uploads location
+sudo docker compose exec nginx grep -A3 "uploads" /etc/nginx/conf.d/default.conf
+# Should show: location ^~ /uploads/ {
+```
+
+**Upload failing with "Request Entity Too Large":**
+- Nginx `client_max_body_size` is set to 10m in the `/api/` location block
+- Backend `MAX_FILE_SIZE` is 10 MB in `backend/routers/admin_uploads.py`
+- If you need to increase, update both nginx config and the backend file
+
+### Backup Uploaded Images
+```bash
+# Backup uploads volume
+sudo docker run --rm \
+    -v tobyrlouris-blog_uploads_data:/data \
+    -v /var/backups/tobyrlouris-blog:/backup \
+    alpine tar czf /backup/uploads_$(date +%Y%m%d).tar.gz -C /data .
 ```
 
 ---

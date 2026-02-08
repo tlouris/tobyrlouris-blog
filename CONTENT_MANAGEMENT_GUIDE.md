@@ -261,6 +261,37 @@ INSERT INTO blog_posts (
 );
 ```
 
+### Adding Images to Blog Posts
+
+**Method 1: Upload via Admin Panel (Recommended)**
+
+1. Open the post editor in the admin panel
+2. Click the **Upload** button next to the Image URL field
+3. Select an image file (JPEG, PNG, GIF, or WebP, max 10 MB)
+4. The image URL will be populated automatically and a preview shown
+5. Save the post
+
+**Method 2: Use an External URL**
+
+Enter any publicly accessible image URL directly in the Image URL field.
+
+**Method 3: Via API (curl)**
+```bash
+# Login first
+curl -s -c /tmp/cookies.txt -X POST http://localhost/api/admin/login \
+    -H "Content-Type: application/json" \
+    -d @- <<< '{"username":"admin","password":"YOUR_PASSWORD"}'
+
+# Upload image
+curl -s -b /tmp/cookies.txt -X POST http://localhost/api/admin/uploads/image \
+    -F "file=@/path/to/image.jpg;type=image/jpeg"
+# Returns: {"url": "/uploads/images/1234567890_abcdef_filename.jpg"}
+```
+
+**Supported formats:** JPEG, PNG, GIF, WebP (max 10 MB)
+
+Uploaded images are stored persistently in a Docker volume and served at `/uploads/images/`.
+
 ### Editing an Existing Blog Post
 
 ```sql
